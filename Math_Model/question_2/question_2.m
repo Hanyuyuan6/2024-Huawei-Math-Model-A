@@ -1,7 +1,10 @@
 clc; clear; close all;
 
+script_dir = fileparts(mfilename('fullpath'));
+model_root = fileparts(script_dir);
+
 %% 加载数据
-load('附件2-风电机组采集数据.mat');
+load(fullfile(model_root, '附件2-风电机组采集数据.mat'));
 
 %% 风机和空气参数定义
 rho = 1.225;            % 空气密度 kg/m^3

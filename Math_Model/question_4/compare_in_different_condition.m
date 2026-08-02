@@ -1,12 +1,15 @@
 %% 清除环境
 clc; clear; close all;
 
+script_dir = fileparts(mfilename('fullpath'));
+model_root = fileparts(script_dir);
+
 %% 加载数据
 % 从数据文件中加载噪声和延迟作用下风电机组数据 (附件3: 训练数据)
-load('附件3-噪声和延迟作用下的采集数据.mat'); % 附件3-噪声和延迟作用下的采集数据为 data_TS_WF_noise
+load(fullfile(model_root, '附件3-噪声和延迟作用下的采集数据.mat'));
 
 % 加载附件4的数据：额外的十台风机的 300s 测量数据, 作为测试集检验鲁棒模型
-filename_test = '附件4-噪声和延迟作用下的采集数据.xlsx';  % Excel 文件名
+filename_test = fullfile(model_root, '附件4-噪声和延迟作用下的采集数据.xlsx');
 startRow = 10;     % 开始读取的行
 numRows = 100;     % 读取的数据行数
 num_turbines_test_used = 10; % 测试数据中的风机数量
@@ -67,10 +70,10 @@ R = 72.5; % 风轮半径 m
 A = pi * R^2; % 风轮扫掠面积 m^2
 
 % 加载回归模型
-load('mdl_Cp.mat', 'mdl_Cp'); % 加载功率系数 Cp 的回归模型
-load('mdl_Ct.mat', 'mdl_Ct'); % 加载推力系数 Ct 的回归模型
+load(fullfile(model_root, 'mdl_Cp.mat'), 'mdl_Cp');
+load(fullfile(model_root, 'mdl_Ct.mat'), 'mdl_Ct');
 % 加载特征均值和标准差，用于特征标准化
-load('feature_mean_std.mat', 'feature_mean', 'feature_std'); % 包含 feature_mean 和 feature_std
+load(fullfile(model_root, 'feature_mean_std.mat'), 'feature_mean', 'feature_std');
 
 %% 初始化每台风机的载荷历史（用于马尔可夫链模型）
 % 定义马尔可夫链的状态数和转移概率矩阵
@@ -78,8 +81,8 @@ num_states_shaft = 10; % 主轴疲劳状态数
 num_states_tower = 10; % 塔架疲劳状态数
 
 % 加载状态转移矩阵
-load('transition_matrix_shaft.mat'); % 主轴状态转移矩阵
-load('transition_matrix_tower.mat'); % 塔架状态转移矩阵
+load(fullfile(model_root, 'transition_matrix_shaft.mat'));
+load(fullfile(model_root, 'transition_matrix_tower.mat'));
 
 % 初始状态分布
 state_distribution_shaft = zeros(1, num_states_shaft);

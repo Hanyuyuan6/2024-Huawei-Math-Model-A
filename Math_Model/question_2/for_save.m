@@ -1,12 +1,15 @@
 clc; clear; close all;
 
+script_dir = fileparts(mfilename('fullpath'));
+model_root = fileparts(script_dir);
+
 %% 加载数据
-load('附件2-风电机组采集数据.mat');
+load(fullfile(model_root, '附件2-风电机组采集数据.mat'));
 
 %% 加载回归模型和特征均值/标准差
-load('mdl_Cp.mat', 'mdl_Cp');         % 加载功率系数 Cp 的回归模型
-load('mdl_Ct.mat', 'mdl_Ct');         % 加载推力系数 Ct 的回归模型
-load('feature_mean_std.mat', 'feature_mean', 'feature_std');  % 包含 feature_mean 和 feature_std
+load(fullfile(model_root, 'mdl_Cp.mat'), 'mdl_Cp');
+load(fullfile(model_root, 'mdl_Ct.mat'), 'mdl_Ct');
+load(fullfile(model_root, 'feature_mean_std.mat'), 'feature_mean', 'feature_std');
 
 %% 风机和空气参数定义
 rho = 1.225;            % 空气密度 kg/m^3
@@ -95,7 +98,7 @@ for turbine = 1:num_turbines
 end
 
 % 保存扭矩和推力矩阵
-save('Torque_Thrust_Matrices.mat', 'Torque_matrix', 'Thrust_matrix');
+save(fullfile(model_root, 'Torque_Thrust_Matrices.mat'), 'Torque_matrix', 'Thrust_matrix');
 
 % 显示完成信息
 disp('扭矩和推力计算完成，结果已保存到 Torque_Thrust_Matrices.mat');

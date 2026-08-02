@@ -1,0 +1,42 @@
+# Local copies of contest-provided inputs and submission templates.
+# Obtain these from the official competition source; see THIRD_PARTY_DATA.md.
+/Math_Model/A题/
+/Math_Model/附件1-疲劳评估数据.xls
+/Math_Model/附件2-风电机组采集数据.mat
+/Math_Model/附件3-噪声和延迟作用下的采集数据.mat
+/Math_Model/附件4-噪声和延迟作用下的采集数据.xlsx
+/Math_Model/附件5-问题一答案表.xlsx
+/Math_Model/附件6-问题二答案表.xlsx
+
+# MATLAB-generated and temporary files.
+*.asv
+*.m~
+slprj/
+codegen/
+
+# Office lock files.
+~$*
+
+# Secrets and machine-local credentials.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.token
+credentials.json
+.credentials.json
+secrets.toml
+.npmrc
+.pypirc
+.aws/
+.ssh/id_*
+
+# OS and editor metadata.
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
