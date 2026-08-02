@@ -1,8 +1,11 @@
 clc; clear; close all; % 清除命令窗口，清除工作区变量，关闭所有图形窗口
 
+script_dir = fileparts(mfilename('fullpath'));
+model_root = fileparts(script_dir);
+
 %% 加载数据
 % 从数据文件中加载风电机组数据
-load('附件2-风电机组采集数据.mat');
+load(fullfile(model_root, '附件2-风电机组采集数据.mat'));
 
 %% 设置风电场参数
 wind_farm = data_TS_WF.WF_1.WT; % 选择 WF_1 风电场的数据
@@ -53,10 +56,10 @@ R = 72.5; % 风轮半径 m
 A = pi * R^2; % 风轮扫掠面积 m^2
 
 %% 加载回归模型
-load('mdl_Cp.mat', 'mdl_Cp'); % 加载功率系数 Cp 的回归模型
-load('mdl_Ct.mat', 'mdl_Ct'); % 加载推力系数 Ct 的回归模型
+load(fullfile(model_root, 'mdl_Cp.mat'), 'mdl_Cp'); % 加载功率系数 Cp 的回归模型
+load(fullfile(model_root, 'mdl_Ct.mat'), 'mdl_Ct'); % 加载推力系数 Ct 的回归模型
 % 加载特征均值和标准差，用于特征标准化
-load('feature_mean_std.mat', 'feature_mean', 'feature_std'); % 包含 feature_mean 和 feature_std
+load(fullfile(model_root, 'feature_mean_std.mat'), 'feature_mean', 'feature_std');
 
 %% 初始化每台风机的载荷历史（用于雨流计数）
 window_size = 10; % 定义滑动窗口大小（秒）

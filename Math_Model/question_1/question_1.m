@@ -2,6 +2,9 @@ clc;            % 清空命令行窗口
 clear;          % 清除工作区中的所有变量
 close all;      % 关闭所有打开的图形窗口
 
+script_dir = fileparts(mfilename('fullpath'));
+model_root = fileparts(script_dir);
+
 %% 材料参数
 m_shaft = 10;          % 主轴材料 Wohler 曲线斜率
 C_shaft = 9.77e70;     % 主轴材料常数
@@ -14,7 +17,7 @@ num_turbines = 100;      % 风机数量
 total_time = 100;        % 总时间步长（秒）
 
 %% 读取疲劳评估数据
-filename = '附件1-疲劳评估数据.xls';  
+filename = fullfile(model_root, '附件1-疲劳评估数据.xls');
 
 % 读取主轴扭矩和塔架推力数据
 [time, shaft_load, theoretical_shaft_LN, theoretical_shaft_Damage] = readLoadData(filename, '主轴扭矩', total_time, num_turbines);

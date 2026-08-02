@@ -2,9 +2,12 @@
 
 clc; clear; close all;
 
+script_dir = fileparts(mfilename('fullpath'));
+model_root = fileparts(script_dir);
+
 %% 加载数据
-% 请确保附件2的数据文件 '附件2-风电机组采集数据.mat' 位于当前工作目录
-load('附件2-风电机组采集数据.mat');
+% 请确保附件2的数据文件位于 Math_Model 目录
+load(fullfile(model_root, '附件2-风电机组采集数据.mat'));
 
 %% 风机和空气参数定义
 rho = 1.225;            % 空气密度 kg/m^3
@@ -87,9 +90,9 @@ mdl_Cp = fitlm(features_train_standardized, Cp_targets_train);
 mdl_Ct = fitlm(features_train_standardized, Ct_targets_train);
 
 % 保存模型和特征均值、标准差
-save('mdl_Cp.mat', 'mdl_Cp');
-save('mdl_Ct.mat', 'mdl_Ct');
-save('feature_mean_std.mat', 'feature_mean', 'feature_std');
+save(fullfile(model_root, 'mdl_Cp.mat'), 'mdl_Cp');
+save(fullfile(model_root, 'mdl_Ct.mat'), 'mdl_Ct');
+save(fullfile(model_root, 'feature_mean_std.mat'), 'feature_mean', 'feature_std');
 
 % 提示模型已保存
 disp('模型mdl_Cp和mdl_Ct已保存，特征的均值和标准差已保存。');
