@@ -8,6 +8,12 @@
 /Math_Model/附件5-问题一答案表.xlsx
 /Math_Model/附件6-问题二答案表.xlsx
 
+# Derived model objects: MATLAB's fitlm stores the full training data inside the
+# LinearModel object, so these carry 附件2 observation-level data. Regenerate with
+# Math_Model/question_2/Ct_Cp_model_from_Q2.m instead of committing them.
+/Math_Model/mdl_Cp.mat
+/Math_Model/mdl_Ct.mat
+
 # MATLAB-generated and temporary files.
 *.asv
 *.m~

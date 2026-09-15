@@ -44,12 +44,19 @@ repo_root = pwd;
 addpath(genpath(fullfile(repo_root, 'Math_Model')));
 ```
 
-随后按题目顺序运行脚本。问题三和问题四会使用问题二生成的 `mdl_Cp.mat`、`mdl_Ct.mat` 与 `feature_mean_std.mat`。问题四还会使用状态转移矩阵。脚本现在从 `Math_Model/` 解析这些输入，而不是依赖当前工作目录。
+随后按题目顺序运行脚本。**问题三和问题四所需的 `mdl_Cp.mat` 与 `mdl_Ct.mat` 不随仓库分发，需先在本地生成：**
+
+```matlab
+Ct_Cp_model_from_Q2
+```
+
+（上面的 `addpath` 已把该脚本加入搜索路径；与其余脚本一样，它开头的 `clear` 会清空工作区变量，因此按脚本名直接调用，不要用 `run(...)` 传入自定义变量。）该脚本读取 `Math_Model/附件2-风电机组采集数据.mat`，拟合 `Cp`/`Ct` 回归模型，并把 `mdl_Cp.mat`、`mdl_Ct.mat` 与 `feature_mean_std.mat` 写入 `Math_Model/`。生成后即可运行问题三、问题四。问题四还会使用状态转移矩阵。脚本从 `Math_Model/` 解析这些输入，而不是依赖当前工作目录。
 
 ## 数据注意事项
 
 - 加载附件 3 后，请确认工作区变量名为 `data_TS_WF_noise`；若官方文件版本不同，以实际变量名为准。
 - 大型 `.mat` 文件未纳入仓库。不要把本地数据、答案表、缓存或 Office 临时文件强制加入 Git。
+- `mdl_Cp.mat` / `mdl_Ct.mat` 已于 2026-09-15 从仓库移除。MATLAB 的 `fitlm` 会把完整训练数据存入 `LinearModel` 对象的 `Variables` 与 `Design` 属性，因此这两个文件实际携带附件2的逐观测数据，与本仓库不再分发官方附件的边界冲突。它们由 `Ct_Cp_model_from_Q2.m` 一步重建；每个原本读取这两个文件的脚本本身也需要官方附件，因此移除不改变谁能运行本仓库。
 - 历史提交可能仍包含已删除的第三方文件或机器路径；在历史重写完成前，旧提交仍可访问这些内容。
 
 ## 权利说明
