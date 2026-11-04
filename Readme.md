@@ -7,7 +7,7 @@
 ## 环境
 
 - MATLAB R2024a。
-- 部分脚本需要 Optimization Toolbox、Statistics and Machine Learning Toolbox、Signal Processing Toolbox 或 Econometrics Toolbox；请按 MATLAB 报错安装缺失组件。
+- 工具箱：Statistics and Machine Learning Toolbox（`fitlm`、`predict`、`pca`）、Optimization Toolbox（`fmincon`、`optimoptions`）、Global Optimization Toolbox（`particleswarm`，问题三、四）、Econometrics Toolbox（`arima`、`estimate`、`forecast`，问题四）。雨流计数为自写函数，不需要 Signal Processing Toolbox。
 - 脚本使用自身位置解析输入路径，不依赖 Windows 盘符，也可在 macOS/Linux MATLAB 中运行。
 
 ## 准备官方输入
@@ -31,8 +31,8 @@
 - `Math_Model/question_3/question_3.m`：问题三优化调度。
 - `Math_Model/question_3/question_3_local_OPT.m`：问题三局部最优对照。
 - `Math_Model/question_4/question_4.m`：问题四噪声与延迟条件下的调度。
-- `Math_Model/question_4/Calcul_state_transfer.m`：计算状态转移矩阵。
-- `Math_Model/question_4/PCA_for_weight.m`：估计累积疲劳损伤权重。
+- `Math_Model/question_4/Calcul_state_transfer.m`：计算状态转移矩阵（只显示、不保存；仓库中的 `transition_matrix_*.mat` 即其结果）。
+- `Math_Model/question_4/PCA_for_weight.m`：估计累积疲劳损伤权重（只打印、不保存）。
 - `Math_Model/question_4/compare_in_different_condition.m`：比较不同条件下的表现。
 
 ## 建议运行顺序
